@@ -1,0 +1,3 @@
+matchbox_http_endpoint = "http://matchbox.sabana.com:8080"
+matchbox_rpc_endpoint = "matchbox.sabana.com:8081"
+ssh_authorized_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDuoXR+QyehKD5ztSNLAVeoBqXEXS+VoTWLb1i2PDY3RgwEaCzy5yvFhACk2ZWOqqPE5WNTa4/MJMwDgbsdnMO887+VyCMEv+raHFP687rn+wcl+NTCNLCmryxIALwik2AKTZjw2R9NTWirQ1c+h3nmA7OhtzR1CKjNkjcHAijIcjwxmUIjfgeijV8IA5lwEhEoI8AKT5I4SStPX4NcjWiU5P0+FdaatQ123YuGEgLEcZxt84EFF9K6eXwQrhtHVs3SmCP+dkVYZUJ5ijE1jiZxnQXJ/NvXUCQJq81RXQr8aA25E4o3hUml/aFXen+UvRl2ijvaGzoejojKgQbUPCfr lcalvo@GuIslander-MBP.local"
