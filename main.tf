@@ -1,5 +1,5 @@
 module "myk8s" {
-  source = "git::https://github.com/guislander/typhoon//bare-metal/fedora-coreos/kubernetes?ref=v1.18.3"
+  source = "git::https://github.com/guislander/typhoon//bare-metal/fedora-coreos/kubernetes"
 
   # bare-metal
   cluster_name            = "k8s"
