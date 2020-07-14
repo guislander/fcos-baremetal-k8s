@@ -32,6 +32,7 @@ systemd:
         [Unit]
         Description=Adjust SELinux iptables policy
         ConditionPathExists=/opt/adjusted-iptables-policy/allow-iptables-restor.te
+        After=install-checkpolicy.service
 
         [Service]
         Type=oneshot
