@@ -1,0 +1,43 @@
+variant: fcos
+version: 1.0.0
+storage:
+  directories:
+  - path: /opt/adjusted-iptables-policy
+    overwrite: true
+  files:
+    - 
+      #
+      # Istio SELinux policy sorce file (re: https://github.com/istio/istio/issues/24101)
+      #
+      path: /opt/adjusted-iptables-policy/allow-iptables-restor.te
+      overwrite: true
+      contents: 
+        inline: |
+          module allow-iptables-restor 1.0;
+          require {
+          type kernel_t;
+          type container_t;
+          class system module_request;
+          }
+          allow container_t kernel_t:system module_request;
+systemd:
+  units:
+    - name: adj-iptables.service
+      #
+      # Modifying selinux policy for iptables to enable Istio capabilities
+      # (re: https://download.geo.drweb.com/pub/drweb/unix/doc/HTML/ControlCenter/en/dw_8_install_selinux.htm)
+      #
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Adjust SELinux iptables policy
+        ConditionPathExists=/opt/adjusted-iptables-policy/allow-iptables-restor.te
+
+        [Service]
+        Type=oneshot
+        ExecStart=checkmodule -M -m -o /opt/adjusted-iptables-policy/allow-iptables-restor.mod /opt/adjusted-iptables-policy/allow-iptables-restor.te
+        ExecStart=semodule_package -o /opt/adjusted-iptables-policy/allow-iptables-restor.pp -m /opt/adjusted-iptables-policy/allow-iptables-restor.mod
+        ExecStart=semodule -i /opt/adjusted-iptables-policy/allow-iptables-restor.pp
+
+        [Install]
+        WantedBy=multi=user.target

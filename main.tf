@@ -1,11 +1,12 @@
 module "myk8s" {
   source = "git::https://github.com/guislander/typhoon//bare-metal/fedora-coreos/kubernetes"
+  #source = "./typhoon//bare-metal/fedora-coreos/kubernetes"
 
   # bare-metal
   cluster_name            = "k8s"
   matchbox_http_endpoint  = "http://matchbox.sabana.com:8080"
   os_stream               = "stable"
-  os_version              = "31.20200407.3.0"
+  os_version              = "32.20200601.3.0"
 
   # configuration
   k8s_domain_name    = "node1.sabana.com"
@@ -39,11 +40,17 @@ module "myk8s" {
      ],
      "node2" = [
        file("./snippets/worker-disks.yaml"),
+       file("./snippets/worker-volumes.yaml"),
        file("./snippets/worker-networking.yaml"),
+       file("./snippets/worker-selinux.yaml"),
+       file("./snippets/worker-iptables-policy.yaml"),
      ],
      "node3" = [
        file("./snippets/worker-disks.yaml"),
+       file("./snippets/worker-volumes.yaml"),
        file("./snippets/worker-networking.yaml"),
+       file("./snippets/worker-selinux.yaml"),
+       file("./snippets/worker-iptables-policy.yaml"),
      ]
    }
 
@@ -51,4 +58,9 @@ module "myk8s" {
   install_disk = "/dev/nvme0n1"
 
   #cached_install = true
+}
+
+resource "local_file" "kubeconfig-myk8s" {
+  content  = module.myk8s.kubeconfig-admin
+  filename = "/Users/lcalvo/.kube/configs/myk8s-config"
 }

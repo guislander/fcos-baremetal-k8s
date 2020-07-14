@@ -1,0 +1,81 @@
+variant: fcos
+version: 1.0.0
+systemd:
+  units:
+    - name: data01-vols.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=data01 volume directories prep
+        After=var-mnt-data01.mount
+
+        [Service]
+        Type=oneshot
+        ExecStart=mkdir -p /var/mnt/data01/vol01 
+        ExecStart=mkdir -p /var/mnt/data01/vol02 
+        ExecStart=chcon -Rt svirt_sandbox_file_t /var/mnt/data01/vol01
+        ExecStart=chcon -Rt svirt_sandbox_file_t /var/mnt/data01/vol02
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: data02-vols.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=data02 volume directories prep
+        After=var-mnt-data02.mount
+
+        [Service]
+        Type=oneshot
+        ExecStart=mkdir -p /var/mnt/data02/vol01 
+        ExecStart=mkdir -p /var/mnt/data02/vol02 
+        ExecStart=chcon -Rt svirt_sandbox_file_t /var/mnt/data02/vol01
+        ExecStart=chcon -Rt svirt_sandbox_file_t /var/mnt/data02/vol02
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: data03-vols.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=data03 volume directories prep
+        After=var-mnt-data03.mount
+
+        [Service]
+        Type=oneshot
+        ExecStart=mkdir -p /var/mnt/data03/vol01 
+        ExecStart=mkdir -p /var/mnt/data03/vol02 
+        ExecStart=chcon -Rt svirt_sandbox_file_t /var/mnt/data03/vol01
+        ExecStart=chcon -Rt svirt_sandbox_file_t /var/mnt/data03/vol02
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: data04-vols.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=data04 volume directories prep
+        After=var-mnt-data04.mount
+
+        [Service]
+        Type=oneshot
+        ExecStart=mkdir -p /var/mnt/data04/vol01 
+        ExecStart=mkdir -p /var/mnt/data04/vol02 
+        ExecStart=chcon -Rt svirt_sandbox_file_t /var/mnt/data04/vol01
+        ExecStart=chcon -Rt svirt_sandbox_file_t /var/mnt/data04/vol02
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: local-path-provisioner-prep.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=local path provisioner directories prep
+
+        [Service]
+        Type=oneshot
+        ExecStart=mkdir -p /opt/local-path-provisioner
+        ExecStart=chcon -Rt svirt_sandbox_file_t /opt/local-path-provisioner
+
+        [Install]
+        WantedBy=multi-user.target

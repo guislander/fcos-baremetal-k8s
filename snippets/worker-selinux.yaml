@@ -1,0 +1,24 @@
+variant: fcos
+version: 1.0.0
+systemd:
+  units:
+    - name: install-checkpolicy.service
+      #
+      # Adding overlays to rpm-ostree in this case is strictly for selinux policy adjustment
+      # for iptables for istio-init containers
+      #
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Install checkpolicy package
+        ConditionFirstBoot=yes
+        Wants=network-online.target
+        After=network-online.target
+        After=multi-user.target
+
+        [Service]
+        Type=oneshot
+        ExecStart=rpm-ostree install checkpolicy --reboot
+
+        [Install]
+        WantedBy=multi-user.target
