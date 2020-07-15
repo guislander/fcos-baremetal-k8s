@@ -32,7 +32,9 @@ systemd:
         [Unit]
         Description=Adjust SELinux iptables policy
         ConditionPathExists=/opt/adjusted-iptables-policy/allow-iptables-restor.te
+        Wants=install-checkpolicy.service
         After=install-checkpolicy.service
+        After=multi-user.target
 
         [Service]
         Type=oneshot
@@ -41,4 +43,5 @@ systemd:
         ExecStart=semodule -i /opt/adjusted-iptables-policy/allow-iptables-restor.pp
 
         [Install]
-        WantedBy=multi=user.target
+        WantedBy=multi-user.target
+
