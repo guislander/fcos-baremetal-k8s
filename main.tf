@@ -54,6 +54,9 @@ module "myk8s" {
      ]
    }
 
+  # enable k8s extension api aggregation
+  enable_aggregation = true
+
   # nvme boot drive /dev/nvme0n1
   install_disk = "/dev/nvme0n1"
 
