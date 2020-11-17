@@ -6,7 +6,7 @@ module "myk8s" {
   cluster_name            = "k8s"
   matchbox_http_endpoint  = "http://matchbox.sabana.com:8080"
   os_stream               = "stable"
-  os_version              = "33.20201104.1.0"
+  os_version              = "32.20201018.3.0"
 
   # configuration
   k8s_domain_name    = "node1.sabana.com"

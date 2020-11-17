@@ -1,5 +1,5 @@
 provider "matchbox" {
-  version     = "0.3.0"
+  version     = "0.4.1"
   endpoint    = "matchbox.sabana.com:8081"
   client_cert = file("~/.config/matchbox/client.crt")
   client_key  = file("~/.config/matchbox/client.key")
@@ -7,6 +7,6 @@ provider "matchbox" {
 }
 
 provider "ct" {
-  version = "0.5.0"
+  version = "0.7.0"
 }
 
