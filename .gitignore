@@ -4,3 +4,4 @@
 terraform-provider*
 tf-provider*
 .terraform/
+.terraform*
