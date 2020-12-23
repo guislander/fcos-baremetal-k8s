@@ -10,7 +10,7 @@ module "myk8s" {
 
   # configuration
   k8s_domain_name    = "node1.sabana.com"
-  ssh_authorized_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC9t+kc0ALu7225vgTi3itCHEHOEwjkDBGto93O7yKcqKg65XkHPttjmh2knQDLq8jbCjuE9yI+ic+vm0R+snul6HPNTDRgEoJT3kWseHbljL3M4x6Spsl++dhLW+pUNEWzI+WaOFYKTjpuhEtVzCW747KzGWk1tNZfQhH71qcfkLbEPPhdI68f6cqG/qGnYgAG1jKkbqzSTB30aRIc0VLkFHcYey96IPpZ82PM0Gn8IAWaB5Y/xkVeLO9FgYrC9jzr2GlSg3vrFGHEUbK4BGs9SFuUhXJhNxn8R90h8DrZlPCQ7eo+JzQO2+KphhAKW+gozOkSAoEwqhCnZO20vUrAwI+gkCwLToWMJAWkf4ziyDJwaeLmZ4r0+DoIvk8Ch9zjKkXO15XS5UY/oxquLZeTNwiFVGnu2VeFnuoyIwa72MxUFio+DxP4eCLSCPNeF5V6rPppRlkHvfEC77NogipTdNw5ZrZqO00DYD6k6pusk7VkGm8ApaCmUubDJiFKBGk= lcalvo@GuIslander-MBP.sabana.com"
+  ssh_authorized_key = "file("~/.ssh/id_rsa")"
 
   # machines
 
