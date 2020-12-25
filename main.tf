@@ -10,7 +10,7 @@ module "myk8s" {
 
   # configuration
   k8s_domain_name    = "node1.sabana.com"
-  ssh_authorized_key = file("~/.ssh/id_rsa.pub")
+  ssh_authorized_key = file("~/.ssh/id_ed25519.pub")
 
   # machines
 
