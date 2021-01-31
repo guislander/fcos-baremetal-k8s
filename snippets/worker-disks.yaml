@@ -3,22 +3,22 @@ version: 1.1.0
 storage:
   disks:
     - device: /dev/nvme1n1
-      wipe_table: false
+      wipe_table: true
       partitions:
-        - number: 1
+        - number: 0
           label: data01
     - device: /dev/nvme2n1
-      wipe_table: false
+      wipe_table: true
       partitions:
-        - number: 1
+        - number: 0
           label: data02
     - device: /dev/nvme3n1
-      wipe_table: false
+      wipe_table: true
       partitions:
-        - number: 1
+        - number: 0
           label: data03
     - device: /dev/nvme4n1
-      wipe_table: false
+      wipe_table: true
       partitions:
-        - number: 1
+        - number: 0
           label: data04
