@@ -39,14 +39,14 @@ module "myk8s" {
        file("./snippets/master-networking.yaml")
      ],
      "node2" = [
-       #file("./snippets/worker-disks.yaml"),
+       file("./snippets/worker-disks.yaml"),
        #file("./snippets/worker-volumes.yaml"),
        file("./snippets/worker-networking.yaml"),
        file("./snippets/worker-selinux.yaml"),
        file("./snippets/worker-iptables-policy.yaml"),
      ],
      "node3" = [
-       #file("./snippets/worker-disks.yaml"),
+       file("./snippets/worker-disks.yaml"),
        #file("./snippets/worker-volumes.yaml"),
        file("./snippets/worker-networking.yaml"),
        file("./snippets/worker-selinux.yaml"),
