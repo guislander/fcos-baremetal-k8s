@@ -2,14 +2,14 @@ variant: fcos
 version: 1.1.0
 storage:
   directories:
-  - path: /opt/adjusted-iptables-policy
+  - path: /opt/adjusted-selinux-policy
     overwrite: true
   files:
     - 
       #
-      # Istio SELinux policy sorce file (re: https://github.com/istio/istio/issues/24101)
+      # Istio SELinux policy source file (re: https://github.com/istio/istio/issues/24101)
       #
-      path: /opt/adjusted-iptables-policy/allow-iptables-restor.te
+      path: /opt/adjusted-selinux-policy/allow-iptables-restor.te
       overwrite: true
       contents: 
         inline: |
@@ -20,6 +20,22 @@ storage:
           class system module_request;
           }
           allow container_t kernel_t:system module_request;
+    - 
+      #
+      # minio SELinux policy source file
+      #
+      path: /opt/adjusted-selinux-policy/allow-container-dir-create.te
+      overwrite: true
+      contents: 
+        inline: |
+          module allow-container-dir-create 1.0;
+          require {
+          type container_t;
+          type container_var_lib_t;
+          class dir create;
+          }
+          allow container_t container_var_lib_t:dir create;
+
 systemd:
   units:
     - name: adj-iptables.service
@@ -30,17 +46,21 @@ systemd:
       enabled: true
       contents: |
         [Unit]
-        Description=Adjust SELinux iptables policy
-        ConditionPathExists=/opt/adjusted-iptables-policy/allow-iptables-restor.te
+        Description=Adjust SELinux policy
+        ConditionPathExists=/opt/adjusted-selinux-policy/allow-iptables-restor.te
+        ConditionPathExists=/opt/adjusted-selinux-policy/allow-container-dir-create.te
         Wants=install-checkpolicy.service
         After=install-checkpolicy.service
         After=multi-user.target
 
         [Service]
         Type=oneshot
-        ExecStart=checkmodule -M -m -o /opt/adjusted-iptables-policy/allow-iptables-restor.mod /opt/adjusted-iptables-policy/allow-iptables-restor.te
-        ExecStart=semodule_package -o /opt/adjusted-iptables-policy/allow-iptables-restor.pp -m /opt/adjusted-iptables-policy/allow-iptables-restor.mod
-        ExecStart=semodule -i /opt/adjusted-iptables-policy/allow-iptables-restor.pp
+        ExecStart=checkmodule -M -m -o /opt/adjusted-selinux-policy/allow-container-dir-create.mod /opt/adjusted-selinux-policy/allow-container-dir-create.te
+        ExecStart=semodule_package -o /opt/adjusted-selinux-policy/allow-container-dir-create.pp -m /opt/adjusted-selinux-policy/allow-container-dir-create.mod
+        ExecStart=semodule -i /opt/adjusted-selinux-policy/allow-container-dir-create.pp
+        ExecStart=checkmodule -M -m -o /opt/adjusted-selinux-policy/allow-iptables-restor.mod /opt/adjusted-selinux-policy/allow-iptables-restor.te
+        ExecStart=semodule_package -o /opt/adjusted-selinux-policy/allow-iptables-restor.pp -m /opt/adjusted-selinux-policy/allow-iptables-restor.mod
+        ExecStart=semodule -i /opt/adjusted-selinux-policy/allow-iptables-restor.pp
 
         [Install]
         WantedBy=multi-user.target
