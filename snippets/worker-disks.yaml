@@ -22,24 +22,3 @@ storage:
       partitions:
         - number: 0
           label: data04
-  filesystems:
-    - path: /var/mnt/data01
-      device: /dev/disk/by-partlabel/data01
-      format: xfs
-      wipe_filesystem: true
-      label: data01
-    - path: /var/mnt/data02
-      device: /dev/disk/by-partlabel/data02
-      format: xfs
-      wipe_filesystem: true
-      label: data02
-    - path: /var/mnt/data03
-      device: /dev/disk/by-partlabel/data03
-      format: xfs
-      wipe_filesystem: true
-      label: data03
-    - path: /var/mnt/data04
-      device: /dev/disk/by-partlabel/data04
-      format: xfs
-      wipe_filesystem: true
-      label: data04
