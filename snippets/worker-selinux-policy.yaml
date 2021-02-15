@@ -17,14 +17,18 @@ storage:
           module allow-iptables-dir-files 1.0;
           require {
           type kernel_t;
+          type var_t;
           type container_t;
           type container_var_lib_t;
+          type container_var_run_t;
           class system module_request;
           class dir { create write };
           class file { create open read write lock };
           }
           allow container_t kernel_t:system module_request;
-          allow container_t container_var_lib_t:dir { create write };
+          allow container_t container_var_lib_t:dir create;
+          allow container_t container_var_run_t:dir write;
+          allow container_t var_t:dir write;
           allow container_t container_var_lib_t:file { create open read write lock };
 systemd:
   units:
