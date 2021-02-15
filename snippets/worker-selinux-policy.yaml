@@ -32,7 +32,7 @@ storage:
           allow container_t container_var_lib_t:file { create open read write lock };
 systemd:
   units:
-    - name: adj-iptables.service
+    - name: adj-selinux.service
       #
       # Modifying selinux policy for iptables to enable Istio as well as minio direct-csi and rancher local peristent volume
       # (re: https://download.geo.drweb.com/pub/drweb/unix/doc/HTML/ControlCenter/en/dw_8_install_selinux.htm)
