@@ -8,49 +8,24 @@ storage:
     - 
       #
       # Istio SELinux policy source file (re: https://github.com/istio/istio/issues/24101)
+      # and minio SELinux policy 
       #
-      path: /opt/adjusted-selinux-policy/allow-iptables-restor.te
+      path: /opt/adjusted-selinux-policy/allow-iptables-dir-file.te
       overwrite: true
       contents: 
         inline: |
-          module allow-iptables-restor 1.0;
+          module allow-iptables-dir-files 1.0;
           require {
           type kernel_t;
           type container_t;
+          type container_var_lib_t;
           class system module_request;
+          class dir create;
+          class file { create open read write lock };
           }
           allow container_t kernel_t:system module_request;
-    - 
-      #
-      # minio SELinux policy source file
-      #
-      path: /opt/adjusted-selinux-policy/allow-container-dir-create.te
-      overwrite: true
-      contents: 
-        inline: |
-          module allow-container-dir-create 1.0;
-          require {
-          type container_t;
-          type container_var_lib_t;
-          class dir create;
-          }
           allow container_t container_var_lib_t:dir create;
-    - 
-      #
-      # minio SELinux policy source file
-      #
-      path: /opt/adjusted-selinux-policy/allow-container-file-corw.te
-      overwrite: true
-      contents: 
-        inline: |
-          module allow-container-file-corw 1.0;
-          require {
-          type container_t;
-          type container_var_lib_t;
-          class file { create open read write };
-          }
-          allow container_t container_var_lib_t:file { create open read write };
-
+          allow container_t container_var_lib_t:file { create open read write lock };
 systemd:
   units:
     - name: adj-iptables.service
@@ -62,23 +37,16 @@ systemd:
       contents: |
         [Unit]
         Description=Adjust SELinux policy
-        ConditionPathExists=/opt/adjusted-selinux-policy/allow-iptables-restor.te
-        ConditionPathExists=/opt/adjusted-selinux-policy/allow-container-dir-corw.te
+        ConditionPathExists=/opt/adjusted-selinux-policy/allow-iptables-dir-files.te
         Wants=install-checkpolicy.service
         After=install-checkpolicy.service
         After=multi-user.target
 
         [Service]
         Type=oneshot
-        ExecStart=checkmodule -M -m -o /opt/adjusted-selinux-policy/allow-container-dir-create.mod /opt/adjusted-selinux-policy/allow-container-dir-create.te
-        ExecStart=semodule_package -o /opt/adjusted-selinux-policy/allow-container-dir-create.pp -m /opt/adjusted-selinux-policy/allow-container-dir-create.mod
-        ExecStart=semodule -i /opt/adjusted-selinux-policy/allow-container-dir-create.pp
-        ExecStart=checkmodule -M -m -o /opt/adjusted-selinux-policy/allow-container-file-corw.mod /opt/adjusted-selinux-policy/allow-container-file-corw.te
-        ExecStart=semodule_package -o /opt/adjusted-selinux-policy/allow-container-file-core.pp -m /opt/adjusted-selinux-policy/allow-container-file-corw.mod
-        ExecStart=semodule -i /opt/adjusted-selinux-policy/allow-container-file-corw.pp
-        ExecStart=checkmodule -M -m -o /opt/adjusted-selinux-policy/allow-iptables-restor.mod /opt/adjusted-selinux-policy/allow-iptables-restor.te
-        ExecStart=semodule_package -o /opt/adjusted-selinux-policy/allow-iptables-restor.pp -m /opt/adjusted-selinux-policy/allow-iptables-restor.mod
-        ExecStart=semodule -i /opt/adjusted-selinux-policy/allow-iptables-restor.pp
+        ExecStart=checkmodule -M -m -o /opt/adjusted-selinux-policy/allow-iptables-dir-files.mod /opt/adjusted-selinux-policy/allow-iptables-dir-files.te
+        ExecStart=semodule_package -o /opt/adjusted-selinux-policy/allow-iptables-dir-files.pp -m /opt/adjusted-selinux-policy/allow-iptables-dir-files.mod
+        ExecStart=semodule -i /opt/adjusted-selinux-policy/allow-iptables-dir-files.pp
 
         [Install]
         WantedBy=multi-user.target
