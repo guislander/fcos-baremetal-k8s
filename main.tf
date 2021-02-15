@@ -40,14 +40,14 @@ module "myk8s" {
      ],
      "node2" = [
        file("./snippets/worker-disks.yaml"),
-       #file("./snippets/worker-filesystem.yaml"),
+       file("./snippets/worker-filesystem.yaml"),
        file("./snippets/worker-networking.yaml"),
        file("./snippets/worker-selinux.yaml"),
        file("./snippets/worker-selinux-policy.yaml"),
      ],
      "node3" = [
        file("./snippets/worker-disks.yaml"),
-       #file("./snippets/worker-filesystem.yaml"),
+       file("./snippets/worker-filesystem.yaml"),
        file("./snippets/worker-networking.yaml"),
        file("./snippets/worker-selinux.yaml"),
        file("./snippets/worker-selinux-policy.yaml"),
