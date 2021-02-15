@@ -8,7 +8,7 @@ storage:
     - 
       #
       # Istio SELinux policy source file (re: https://github.com/istio/istio/issues/24101)
-      # and minio SELinux policy 
+      # as well as minio direct-csi and rancher local persistent volume SELinux policy 
       #
       path: /opt/adjusted-selinux-policy/allow-iptables-dir-file.te
       overwrite: true
@@ -30,7 +30,7 @@ systemd:
   units:
     - name: adj-iptables.service
       #
-      # Modifying selinux policy for iptables to enable Istio capabilities
+      # Modifying selinux policy for iptables to enable Istio as well as minio direct-csi and rancher local peristent volume
       # (re: https://download.geo.drweb.com/pub/drweb/unix/doc/HTML/ControlCenter/en/dw_8_install_selinux.htm)
       #
       enabled: true
