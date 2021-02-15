@@ -10,7 +10,7 @@ storage:
       # Istio SELinux policy source file (re: https://github.com/istio/istio/issues/24101)
       # as well as minio direct-csi and rancher local persistent volume SELinux policy 
       #
-      path: /opt/adjusted-selinux-policy/allow-iptables-dir-file.te
+      path: /opt/adjusted-selinux-policy/allow-iptables-dir-files.te
       overwrite: true
       contents: 
         inline: |
