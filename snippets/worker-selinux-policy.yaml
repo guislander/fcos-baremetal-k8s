@@ -35,6 +35,21 @@ storage:
           class dir create;
           }
           allow container_t container_var_lib_t:dir create;
+    - 
+      #
+      # minio SELinux policy source file
+      #
+      path: /opt/adjusted-selinux-policy/allow-container-file-create.te
+      overwrite: true
+      contents: 
+        inline: |
+          module allow-container-file-create 1.0;
+          require {
+          type container_t;
+          type container_var_lib_t;
+          class file create;
+          }
+          allow container_t container_var_lib_t:file create;
 
 systemd:
   units:
@@ -58,6 +73,9 @@ systemd:
         ExecStart=checkmodule -M -m -o /opt/adjusted-selinux-policy/allow-container-dir-create.mod /opt/adjusted-selinux-policy/allow-container-dir-create.te
         ExecStart=semodule_package -o /opt/adjusted-selinux-policy/allow-container-dir-create.pp -m /opt/adjusted-selinux-policy/allow-container-dir-create.mod
         ExecStart=semodule -i /opt/adjusted-selinux-policy/allow-container-dir-create.pp
+        ExecStart=checkmodule -M -m -o /opt/adjusted-selinux-policy/allow-container-file-create.mod /opt/adjusted-selinux-policy/allow-container-file-create.te
+        ExecStart=semodule_package -o /opt/adjusted-selinux-policy/allow-container-file-create.pp -m /opt/adjusted-selinux-policy/allow-container-file-create.mod
+        ExecStart=semodule -i /opt/adjusted-selinux-policy/allow-container-file-create.pp
         ExecStart=checkmodule -M -m -o /opt/adjusted-selinux-policy/allow-iptables-restor.mod /opt/adjusted-selinux-policy/allow-iptables-restor.te
         ExecStart=semodule_package -o /opt/adjusted-selinux-policy/allow-iptables-restor.pp -m /opt/adjusted-selinux-policy/allow-iptables-restor.mod
         ExecStart=semodule -i /opt/adjusted-selinux-policy/allow-iptables-restor.pp
