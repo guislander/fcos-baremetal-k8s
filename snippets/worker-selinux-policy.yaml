@@ -22,13 +22,14 @@ storage:
           type container_var_lib_t;
           type container_var_run_t;
           class system module_request;
-          class dir { create write };
+          class dir { create write add_name setattr;};
           class file { create open read write lock };
           }
           allow container_t kernel_t:system module_request;
           allow container_t container_var_lib_t:dir create;
           allow container_t container_var_run_t:dir write;
-          allow container_t var_t:dir { write add_name };
+          allow container_t var_t:dir { write create add_name setattr };
+          allow container_t var_t:file { create open read write lock };
           allow container_t container_var_lib_t:file { create open read write lock };
 systemd:
   units:
