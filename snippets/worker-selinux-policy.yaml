@@ -39,17 +39,17 @@ storage:
       #
       # minio SELinux policy source file
       #
-      path: /opt/adjusted-selinux-policy/allow-container-file-create.te
+      path: /opt/adjusted-selinux-policy/allow-container-file-corw.te
       overwrite: true
       contents: 
         inline: |
-          module allow-container-file-create 1.0;
+          module allow-container-file-corw 1.0;
           require {
           type container_t;
           type container_var_lib_t;
-          class file create;
+          class file { create open read write };
           }
-          allow container_t container_var_lib_t:file create;
+          allow container_t container_var_lib_t:file { create open read write };
 
 systemd:
   units:
@@ -63,7 +63,7 @@ systemd:
         [Unit]
         Description=Adjust SELinux policy
         ConditionPathExists=/opt/adjusted-selinux-policy/allow-iptables-restor.te
-        ConditionPathExists=/opt/adjusted-selinux-policy/allow-container-dir-create.te
+        ConditionPathExists=/opt/adjusted-selinux-policy/allow-container-dir-corw.te
         Wants=install-checkpolicy.service
         After=install-checkpolicy.service
         After=multi-user.target
@@ -73,9 +73,9 @@ systemd:
         ExecStart=checkmodule -M -m -o /opt/adjusted-selinux-policy/allow-container-dir-create.mod /opt/adjusted-selinux-policy/allow-container-dir-create.te
         ExecStart=semodule_package -o /opt/adjusted-selinux-policy/allow-container-dir-create.pp -m /opt/adjusted-selinux-policy/allow-container-dir-create.mod
         ExecStart=semodule -i /opt/adjusted-selinux-policy/allow-container-dir-create.pp
-        ExecStart=checkmodule -M -m -o /opt/adjusted-selinux-policy/allow-container-file-create.mod /opt/adjusted-selinux-policy/allow-container-file-create.te
-        ExecStart=semodule_package -o /opt/adjusted-selinux-policy/allow-container-file-create.pp -m /opt/adjusted-selinux-policy/allow-container-file-create.mod
-        ExecStart=semodule -i /opt/adjusted-selinux-policy/allow-container-file-create.pp
+        ExecStart=checkmodule -M -m -o /opt/adjusted-selinux-policy/allow-container-file-corw.mod /opt/adjusted-selinux-policy/allow-container-file-corw.te
+        ExecStart=semodule_package -o /opt/adjusted-selinux-policy/allow-container-file-core.pp -m /opt/adjusted-selinux-policy/allow-container-file-corw.mod
+        ExecStart=semodule -i /opt/adjusted-selinux-policy/allow-container-file-corw.pp
         ExecStart=checkmodule -M -m -o /opt/adjusted-selinux-policy/allow-iptables-restor.mod /opt/adjusted-selinux-policy/allow-iptables-restor.te
         ExecStart=semodule_package -o /opt/adjusted-selinux-policy/allow-iptables-restor.pp -m /opt/adjusted-selinux-policy/allow-iptables-restor.mod
         ExecStart=semodule -i /opt/adjusted-selinux-policy/allow-iptables-restor.pp
