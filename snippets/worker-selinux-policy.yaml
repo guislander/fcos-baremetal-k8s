@@ -18,6 +18,7 @@ storage:
           require {
           type kernel_t;
           type container_t;
+          type container_var_run_t;
           type container_var_lib_t;
           class system module_request;
           class dir create;
@@ -25,6 +26,7 @@ storage:
           }
           allow container_t kernel_t:system module_request;
           allow container_t container_var_lib_t:dir create;
+          allow container_t container_var_run_t:dir write;
           allow container_t container_var_lib_t:file { create open read write lock };
 systemd:
   units:
