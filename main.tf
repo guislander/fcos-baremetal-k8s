@@ -17,7 +17,7 @@ module "myk8s" {
   controllers = [{
     name   = "node0"
     mac    = "00:25:90:b9:84:41"
-    domain = "node1.sabana.com"
+    domain = "node0.sabana.com"
   }]
   workers = [
     {
