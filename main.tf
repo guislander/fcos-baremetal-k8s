@@ -35,14 +35,14 @@ module "myk8s" {
       mac    = "3C:EC:EF:0C:1E:20"
       domain = "node3.sabana.com"
     },
-     {
+    {
       name   = "node4",
-      mac    = "00:25:90:b9:83:98"
+      mac    = "00:25:90:b9:83:99"
       domain = "node4.sabana.com"
-    }
-     {
+    },
+    {
       name   = "node5",
-      mac    = "00:25:90:b9:85:80"
+      mac    = "00:25:90:b9:85:81"
       domain = "node5.sabana.com"
     }
  ]
