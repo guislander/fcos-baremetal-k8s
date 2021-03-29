@@ -9,7 +9,7 @@ module "myk8s" {
   os_version              = "32.20200601.3.0"
 
   # configuration
-  k8s_domain_name    = "node1.sabana.com"
+  k8s_domain_name    = "node0.sabana.com"
   ssh_authorized_key = file("~/.ssh/id_ed25519.pub")
 
   # machines
