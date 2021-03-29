@@ -15,11 +15,16 @@ module "myk8s" {
   # machines
 
   controllers = [{
-    name   = "node1"
-    mac    = "3C:EC:EF:02:BA:34"
+    name   = "node0"
+    mac    = "00:25:90:b9:84:41"
     domain = "node1.sabana.com"
   }]
   workers = [
+    {
+      name   = "node1"
+      mac    = "3C:EC:EF:02:BA:34"
+      domain = "node1.sabana.com"
+    },
     {
       name   = "node2",
       mac    = "3C:EC:EF:0C:20:46"
@@ -29,14 +34,24 @@ module "myk8s" {
       name   = "node3",
       mac    = "3C:EC:EF:0C:1E:20"
       domain = "node3.sabana.com"
+    },
+     {
+      name   = "node4",
+      mac    = "00:25:90:b9:83:98"
+      domain = "node4.sabana.com"
     }
-  ]
+     {
+      name   = "node5",
+      mac    = "00:25:90:b9:85:80"
+      domain = "node5.sabana.com"
+    }
+ ]
 
   # additional machine config
 
    snippets = {
      "node1" = [
-       file("./snippets/master-networking.yaml")
+       file("./snippets/worker-networking.yaml")
      ],
      "node2" = [
        file("./snippets/worker-disks.yaml"),
@@ -46,6 +61,20 @@ module "myk8s" {
        file("./snippets/worker-selinux-policy.yaml"),
      ],
      "node3" = [
+       file("./snippets/worker-disks.yaml"),
+       file("./snippets/worker-filesystem.yaml"),
+       file("./snippets/worker-networking.yaml"),
+       file("./snippets/worker-selinux.yaml"),
+       file("./snippets/worker-selinux-policy.yaml"),
+     ]
+      "node4" = [
+       file("./snippets/worker-disks.yaml"),
+       file("./snippets/worker-filesystem.yaml"),
+       file("./snippets/worker-networking.yaml"),
+       file("./snippets/worker-selinux.yaml"),
+       file("./snippets/worker-selinux-policy.yaml"),
+     ]
+      "node5" = [
        file("./snippets/worker-disks.yaml"),
        file("./snippets/worker-filesystem.yaml"),
        file("./snippets/worker-networking.yaml"),
