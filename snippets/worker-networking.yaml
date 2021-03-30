@@ -12,26 +12,26 @@ storage:
           interface-name=team0
           [team]
           config={"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}
-    - path: /etc/NetworkManager/system-connections/team0-slave-eth0.nmconnection
+    - path: /etc/NetworkManager/system-connections/team0-slave-eno5.nmconnection
       mode: 0600
       contents:
         inline: |
           [connection]
-          id=team0-slave-eth0
+          id=team0-slave-eno5
           type=ethernet
-          interface-name=eth0
+          interface-name=eno5
           master=team0
           slave-type=team
           [team-port]
           config={"prio": 100}
-    - path: /etc/NetworkManager/system-connections/team0-slave-eth1.nmconnection
+    - path: /etc/NetworkManager/system-connections/team0-slave-eno6.nmconnection
       mode: 0600
       contents:
         inline: |
           [connection]
-          id=team0-slave-eth1
+          id=team0-slave-eno6
           type=ethernet
-          interface-name=eth1
+          interface-name=eno6
           master=team0
           slave-type=team
           [team-port]
