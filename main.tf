@@ -1,12 +1,12 @@
 module "myk8s" {
   source = "git::https://github.com/guislander/typhoon//bare-metal/fedora-coreos/kubernetes"
-  #source = "./typhoon//bare-metal/fedora-coreos/kubernetes"
-
+ 
   # bare-metal
   cluster_name            = "k8s"
   matchbox_http_endpoint  = "http://matchbox.sabana.com:8080"
   os_stream               = "stable"
-  os_version              = "32.20200601.3.0"
+  #os_version              = "32.20200601.3.0"33.20210314.3.0
+  os_version              = "33.20210314.3.0"
 
   # configuration
   k8s_domain_name    = "node0.sabana.com"
