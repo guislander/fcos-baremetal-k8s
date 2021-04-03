@@ -12,6 +12,10 @@ storage:
           interface-name=team0
           [team]
           config={"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}
+          [ipv4]
+          dns-search=
+          may-fail=false
+          method=auto
     - path: /etc/NetworkManager/system-connections/team0-slave-enp181s0f1.nmconnection
       mode: 0600
       contents:
