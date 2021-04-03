@@ -7,6 +7,7 @@ module "myk8s" {
   os_stream               = "stable"
   #os_version              = "32.20200601.3.0"33.20210314.3.0
   os_version              = "33.20210314.3.0"
+  kernel_args             = "biosdevname=1"
 
   # configuration
   k8s_domain_name    = "node0.sabana.com"
