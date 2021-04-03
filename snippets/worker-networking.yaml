@@ -16,18 +16,6 @@ storage:
           dns-search=
           may-fail=false
           method=auto
-    - path: /etc/NetworkManager/system-connections/team0-slave-enp181s0f1.nmconnection
-      mode: 0600
-      contents:
-        inline: |
-          [connection]
-          id=team0-slave-enp181s0f1
-          type=ethernet
-          interface-name=enp181s0f1
-          master=team0
-          slave-type=team
-          [team-port]
-          config={"prio": 100}
     - path: /etc/NetworkManager/system-connections/team0-slave-enp181s0f0.nmconnection
       mode: 0600
       contents:
@@ -36,6 +24,18 @@ storage:
           id=team0-slave-enp181s0f0
           type=ethernet
           interface-name=enp181s0f0
+          master=team0
+          slave-type=team
+          [team-port]
+          config={"prio": 100}
+    - path: /etc/NetworkManager/system-connections/team0-slave-enp181s0f1.nmconnection
+      mode: 0600
+      contents:
+        inline: |
+          [connection]
+          id=team0-slave-enp181s0f1
+          type=ethernet
+          interface-name=enp181s0f1
           master=team0
           slave-type=team
           [team-port]
