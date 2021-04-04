@@ -5,7 +5,6 @@ module "myk8s" {
   cluster_name            = "k8s"
   matchbox_http_endpoint  = "http://matchbox.sabana.com:8080"
   os_stream               = "stable"
-  #os_version              = "32.20200601.3.0"
   os_version              = "33.20210314.3.0"
   #kernel_args             = ["net.ifnames=0"]
 
