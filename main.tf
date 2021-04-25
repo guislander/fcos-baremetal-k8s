@@ -50,11 +50,11 @@ module "myk8s" {
   # additional machine config
 
    snippets = {
-     "node0" = [
-       file("./snippets/group1-node-os-disk.yaml")
-     ],
+#     "node0" = [
+#       file("./snippets/group1-node-os-disk.yaml")
+#     ],
       "node1" = [
-       file("./snippets/group1-node-os-disk.yaml"),
+#       file("./snippets/group1-node-os-disk.yaml"),
        file("./snippets/worker-networking.yaml")
      ],
      "node2" = [
