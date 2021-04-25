@@ -95,7 +95,7 @@ module "myk8s" {
   enable_aggregation = true
 
   # nvme boot drive /dev/nvme0n1
-  install_disk = "/dev/os"
+  install_disk = "/dev/disk-by-label/os"
 
   #cached_install = true
 }
