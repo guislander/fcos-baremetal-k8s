@@ -45,7 +45,7 @@ module "myk8s" {
       mac    = "00:25:90:b9:85:81"
       domain = "node5.sabana.com"
     }
- ]
+  ]
 
   # additional machine config
 
