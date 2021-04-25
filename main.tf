@@ -51,14 +51,13 @@ module "myk8s" {
 
    snippets = {
      "node0" = [
-       file("./snippets/group2-node-os-disk.yaml")
+       file("./snippets/group1-node-os-disk.yaml")
      ],
       "node1" = [
        file("./snippets/group1-node-os-disk.yaml"),
        file("./snippets/worker-networking.yaml")
      ],
      "node2" = [
-       file("./snippets/group1-node-os-disk.yaml"),
        file("./snippets/group1-worker-disks.yaml"),
        file("./snippets/worker-filesystem.yaml"),
        file("./snippets/worker-networking.yaml"),
@@ -66,7 +65,6 @@ module "myk8s" {
        file("./snippets/worker-selinux-policy.yaml")
      ],
      "node3" = [
-       file("./snippets/group1-node-os-disk.yaml"),
        file("./snippets/group1-worker-disks.yaml"),
        file("./snippets/worker-filesystem.yaml"),
        file("./snippets/worker-networking.yaml"),
@@ -74,7 +72,6 @@ module "myk8s" {
        file("./snippets/worker-selinux-policy.yaml")
      ]
       "node4" = [
-       file("./snippets/group2-node-os-disk.yaml"),
        file("./snippets/group2-worker-disks.yaml"),
        file("./snippets/worker-filesystem.yaml"),
        file("./snippets/worker-networking.yaml"),
@@ -82,7 +79,6 @@ module "myk8s" {
        file("./snippets/worker-selinux-policy.yaml")
      ]
       "node5" = [
-       file("./snippets/group2-node-os-disk.yaml"),
        file("./snippets/group2-worker-disks.yaml"),
        file("./snippets/worker-filesystem.yaml"),
        file("./snippets/worker-networking.yaml"),
