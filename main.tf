@@ -18,32 +18,38 @@ module "myk8s" {
     name   = "node0"
     mac    = "00:25:90:b9:84:41"
     domain = "node0.sabana.com"
+    install_dev = "nvme0n1"
   }]
   workers = [
     {
       name   = "node1"
       mac    = "3C:EC:EF:02:BA:34"
       domain = "node1.sabana.com"
+      install_dev = "nvme0n1"
     },
     {
       name   = "node2",
       mac    = "3C:EC:EF:0C:20:46"
       domain = "node2.sabana.com"
+      install_dev = "nvme0n1"
     },
     {
       name   = "node3",
       mac    = "3C:EC:EF:0C:1E:20"
       domain = "node3.sabana.com"
+      install_dev = "nvme4n1"
     },
     {
       name   = "node4",
       mac    = "00:25:90:b9:83:99"
       domain = "node4.sabana.com"
+      install_dev = "nvme4n1"
     },
     {
       name   = "node5",
       mac    = "00:25:90:b9:85:81"
       domain = "node5.sabana.com"
+      install_dev = "nvme0n1"
     }
   ]
 
@@ -89,9 +95,6 @@ module "myk8s" {
 
   # enable k8s extension api aggregation
   enable_aggregation = true
-
-  # nvme boot drive /dev/nvme0n1
-  install_disk = "/dev/disk-by-label/os"
 
   #cached_install = true
 }
