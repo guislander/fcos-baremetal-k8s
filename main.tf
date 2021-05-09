@@ -37,7 +37,7 @@ module "myk8s" {
       name   = "node3",
       mac    = "3C:EC:EF:0C:1E:20"
       domain = "node3.sabana.com"
-      install_dev = "nvme4n1"
+      install_dev = "nvme0n1"
     },
     {
       name   = "node4",
@@ -49,7 +49,7 @@ module "myk8s" {
       name   = "node5",
       mac    = "00:25:90:b9:85:81"
       domain = "node5.sabana.com"
-      install_dev = "nvme0n1"
+      install_dev = "nvme4n1"
     }
   ]
 
